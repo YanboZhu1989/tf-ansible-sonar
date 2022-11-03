@@ -1,10 +1,8 @@
 ---
 - name: Install Java
   yum:
-    name: '{{ item }}'
-    state: latest
-  with_items:
-    - openjdk-11-jdk
+    name: ['openjdk-11-jdk']
+    state: latest    
   become: true
   
 
@@ -17,11 +15,8 @@
 
 - name: Install PostgreSQL
   yum:
-    name: '{{ item }}'
+    name: ['postgresql96-server','postgresql96-contrib']
     state: latest
-  with_items:
-    - postgresql96-server
-    - postgresql96-contrib
   become: true
   register: installed_psql
   
