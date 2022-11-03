@@ -13,6 +13,11 @@
         name: ['unzip','curl']
         state: latest
       become: true
+      
+    - name: install prerequisites
+      sudo: true
+      apt: name=['libpq-dev', 'python-psycopg2'] state=latest
+
     
     - name: Install requests python package
       pip:
