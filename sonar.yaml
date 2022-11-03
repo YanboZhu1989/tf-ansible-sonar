@@ -1,5 +1,5 @@
 ---
-- hosts: localhost-py3
+- hosts: localhost
   pre_tasks:
     - name: Update all the packages
       apt:
