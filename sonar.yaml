@@ -10,14 +10,8 @@
 
     - name: Install Dependencies
       yum:
-        name: '{{ item }}'
+        name: ['unzip','curl','postgresql-libs','python-psycopg2','policycoreutils-python']
         state: latest
-      with_items:
-        - unzip #Used for Sonarqube installation
-        - curl #Used to get the files       
-        - postgresql-libs #used by psycopg2
-        - python-psycopg2 #Used for PostgreSQL authentication
-        - policycoreutils-python #Used to edit Selinux
       become: true
       when: ansible_os_family == 'RedHat'
 
