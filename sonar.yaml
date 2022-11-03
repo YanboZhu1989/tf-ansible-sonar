@@ -16,7 +16,7 @@
       
     - name: install prerequisites    
       apt: 
-        name: ['libpq-dev', 'python-psycopg2'] 
+        name: ['libpq-dev'] 
         state: latest
       become: true
 
