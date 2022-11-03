@@ -10,10 +10,15 @@
 
     - name: Install Dependencies
       apt:
-        name: ['unzip','curl', 'python-psycopg2-doc']
+        name: ['unzip','curl', 'libpython2.7', 'libpython2.7-dev','python-psycopg2-doc']
         state: latest
       become: true
-      
-
+    
+    - name: Install requests python package
+      pip:
+        name: requests
+      vars:
+        ansible_python_interpreter: /usr/bin/python3
+        
   roles:
     - {role: sonarqube }
