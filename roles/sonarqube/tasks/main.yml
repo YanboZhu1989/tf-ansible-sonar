@@ -6,14 +6,14 @@
   with_items:
     - openjdk-11-jdk
   become: true
-  when: ansible_os_family == 'RedHat'
+  
 
   #install PostgreSQL
 - name: Install PostgreSQL RPM
   yum:
     name: https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-7-x86_64/pgdg-centos96-9.6-3.noarch.rpm
     state: present
-  when: ansible_os_family == 'RedHat'  
+   
 
 - name: Install PostgreSQL
   yum:
@@ -24,7 +24,7 @@
     - postgresql96-contrib
   become: true
   register: installed_psql
-  when: ansible_os_family == 'RedHat'
+  
 
 - name: Intialize PostgreSQL DB
   command: /usr/pgsql-9.6/bin/postgresql96-setup initdb
