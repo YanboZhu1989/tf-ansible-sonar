@@ -2,18 +2,18 @@
 - hosts: localhost
   pre_tasks:
     - name: Update all the packages
-      yum:
+      apt:
         name: '*'
         state: latest
       become: true
-      when: ansible_os_family == 'RedHat'
+      
 
     - name: Install Dependencies
-      yum:
+      apt:
         name: ['unzip','curl','postgresql-libs','python-psycopg2','policycoreutils-python']
         state: latest
       become: true
-      when: ansible_os_family == 'RedHat'
+      
 
   roles:
     - {role: sonarqube }
