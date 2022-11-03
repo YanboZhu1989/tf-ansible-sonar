@@ -63,7 +63,7 @@
   
 - name: unzip sonarqube
   shell: unzip sonarqube-9.0.1.46107.zip
-  dest: /etc/sonarqube
+    dest: /etc/sonarqube
  
 
 #Sonarqube config & start
