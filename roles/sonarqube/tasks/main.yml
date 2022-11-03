@@ -9,7 +9,7 @@
   #install PostgreSQL
 - name: Install PostgreSQL RPM
   yum:
-    name: https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-7-x86_64/postgresql96-9.6.24-1PGDG.rhel7.x86_64.rpm 
+    name: https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
     state: present
   become: true 
 
