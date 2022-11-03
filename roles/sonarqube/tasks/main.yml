@@ -45,7 +45,7 @@
   become: true
 
   #postgreSQL config
-  - name: Create Database for SonarQube
+- name: Create Database for SonarQube
   postgresql_db:
     name: 'sonar'
     encoding: UTF-8
