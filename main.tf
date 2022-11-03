@@ -1,6 +1,6 @@
 locals {
   network = "default"
-  image = “ubuntu-2004-focal-v20221018”
+  image = "ubuntu-2004-focal-v20221018"
   ssh_user = "ansible"
   private_key_path = "~/.ssh/ansbile_ed25519"
 }
