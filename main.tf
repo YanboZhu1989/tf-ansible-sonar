@@ -42,6 +42,6 @@ resource "google_compute_instance" "sonar-server" {
   }
 
   provisioner "local-exec" {
-    command = "ansible-playbook  -i ${google_compute_instance.sonar-server.network_interface.0.access_config.0.nat_ip}, --private-key ${local.private_key_path} nginx.yaml"
+    command = "ansible-playbook  -i ${google_compute_instance.sonar-server.network_interface.0.access_config.0.nat_ip}, --private-key ${local.private_key_path} sonar.yaml"
   }
 }
