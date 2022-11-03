@@ -18,7 +18,7 @@
 - name: Install PostgreSQL
   apt: 
     name: ['postgresql', 'postgresql-contrib']
-  become: true
+  #become: true
    
 - name: Enable and Start PostgreSQL
   service:
