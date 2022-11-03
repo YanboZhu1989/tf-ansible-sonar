@@ -3,7 +3,7 @@
   roles:
     - role: sonarqube
       vars:
-        ansible_python_interpreter: "/usr/bin/python2.7" 
+        ansible_python_interpreter: "/home/boriszhu1989/.local/lib/python3.8" 
 
   pre_tasks:
     - name: Update all the packages
@@ -30,6 +30,6 @@
       pip:
         name: requests
       vars:
-        ansible_python_interpreter: /usr/bin/python3
+        ansible_python_interpreter: /home/boriszhu1989/.local/lib/python3.8
         
 
