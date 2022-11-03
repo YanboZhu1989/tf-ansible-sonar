@@ -10,7 +10,7 @@
 
     - name: Install Dependencies
       apt:
-        name: ['unzip','curl', 'python-psycopg2','policycoreutils-python']
+        name: ['unzip','curl']
         state: latest
       become: true
       
