@@ -22,7 +22,7 @@
    
 - name: Enable and Start PostgreSQL
   service:
-    name: postgresql-12
+    name: postgresql
     state: started
     enabled: yes
   become: true
