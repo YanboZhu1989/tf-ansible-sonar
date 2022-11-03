@@ -12,9 +12,6 @@ provider "google" {
   region = "australia-southeast1-b"
 }
 
-resource "google_service_account" "sonar-server" {
-  account_id = "sonar-server"
-}
 
 resource "google_compute_instance" "sonar-server" {
   name         = "sonar-server"
@@ -32,10 +29,6 @@ resource "google_compute_instance" "sonar-server" {
     access_config {}
   }
 
-  service_account {
-    email  = google_service_account.sonar-server.email
-    scopes = ["cloud-platform"]
-  }
 
   provisioner "remote-exec" {
     inline = ["echo 'Wait until SSH is ready'"]
