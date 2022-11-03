@@ -3,7 +3,7 @@
   roles:
     - role: sonarqube
       vars:
-        ansible_python_interpreter: "/usr/bin/python3" 
+        ansible_python_interpreter: "/usr/bin/python2.7" 
 
   pre_tasks:
     - name: Update all the packages
