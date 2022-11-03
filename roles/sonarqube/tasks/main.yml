@@ -1,20 +1,20 @@
 ---
 - name: Install Java
-  apt:
+  yum:
     name: '{{ item }}'
     state: latest
   with_items:
-    - java-1.8.0-openjdk
+    - openjdk-11-jdk
   become: true
 
   #install PostgreSQL
 - name: Install PostgreSQL RPM
-  apt:
+  yum:
     name: https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-7-x86_64/pgdg-centos96-9.6-3.noarch.rpm
     state: present
 
 - name: Install PostgreSQL
-  apt:
+  yum:
     name: '{{ item }}'
     state: latest
   with_items:
