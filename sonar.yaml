@@ -1,11 +1,8 @@
 ---
 - hosts: localhost
   roles:
-    - sonarqube
-      become: yes
+    - role: sonarqube
       vars:
-        #try to convince not to look for python 2 stuff...
-        #👇 (that's the python on my Ubuntu VM)
         ansible_python_interpreter: "/usr/bin/python3" 
 
   pre_tasks:
@@ -35,5 +32,4 @@
       vars:
         ansible_python_interpreter: /usr/bin/python3
         
-  roles:
-    - {role: sonarqube }
+
