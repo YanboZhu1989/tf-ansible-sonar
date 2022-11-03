@@ -15,21 +15,21 @@
 
 - name: Install PostgreSQL
   yum:
-    name: ['postgresql96-server','postgresql96-contrib']
+    name: ['postgresql14-server','postgresql14-contrib']
     state: latest
   become: true
   register: installed_psql
   
 
 - name: Intialize PostgreSQL DB
-  command: /usr/pgsql-9.6/bin/postgresql96-setup initdb
+  command: /usr/pgsql-14/bin/postgresql14-setup initdb
   become: true
   when: installed_psql.changed
 
 - name: Copies correct PostgreSQL config file over
   copy:
     src: pg_hba.conf
-    dest: /var/lib/pgsql/9.6/data/pg_hba.conf
+    dest: /var/lib/pgsql/14/data/pg_hba.conf
     owner: root
     group: root
     mode: 0644
@@ -37,7 +37,7 @@
 
 - name: Enable and Start PostgreSQL
   service:
-    name: postgresql-9.6
+    name: postgresql-14
     state: started
     enabled: yes
   become: true
