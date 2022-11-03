@@ -13,11 +13,10 @@
         state: latest
       with_items:
         - unzip #Used for Sonarqube installation
-        - curl #Used to get the files
-        - epel-release #used for HTTPD installation
-        - postgresql-libs #used by psycopg2
-        - python-psycopg2 #Used for PostgreSQL authentication
-        - policycoreutils-python #Used to edit Selinux
+        - curl #Used to get the files       
+        #- postgresql-libs #used by psycopg2
+        #- python-psycopg2 #Used for PostgreSQL authentication
+        #- policycoreutils-python #Used to edit Selinux
       become: true
 
   roles:
