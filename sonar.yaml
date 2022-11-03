@@ -1,5 +1,4 @@
 ---
-- name: Install 
 - hosts: all
   pre_tasks:
     - name: Update all the packages
