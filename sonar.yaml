@@ -2,13 +2,13 @@
 - hosts: localhost
   pre_tasks:
     - name: Update all the packages
-      package:
+      yum:
         name: '*'
         state: latest
       become: true
 
     - name: Install Dependencies
-      package:
+      yum:
         name: '{{ item }}'
         state: latest
       with_items:
