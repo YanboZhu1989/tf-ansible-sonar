@@ -1,8 +1,7 @@
 ---
 - hosts: localhost
   roles:
-    -common
-    - role: sonarqube
+    - sonarqube
       become: yes
       vars:
         #try to convince not to look for python 2 stuff...
