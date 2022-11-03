@@ -8,7 +8,7 @@
       become: true
 
     - name: Install Dependencies
-      yum:
+      packsge:
         name: '{{ item }}'
         state: latest
       with_items:
