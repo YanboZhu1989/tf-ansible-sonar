@@ -4,6 +4,7 @@
     - role: sonarqube
       vars:
         ansible_python_interpreter: "/home/boriszhu1989/.local/lib/python3.8" 
+      become: true  
 
   pre_tasks:
     - name: Update all the packages
@@ -31,5 +32,6 @@
         name: requests
       vars:
         ansible_python_interpreter: /home/boriszhu1989/.local/lib/python3.8
+      become: true  
         
 
