@@ -14,9 +14,11 @@
         state: latest
       become: true
       
-    - name: install prerequisites
-      sudo: true
-      apt: name=['libpq-dev', 'python-psycopg2'] state=latest
+    - name: install prerequisites    
+      apt: 
+        name: ['libpq-dev', 'python-psycopg2'] 
+        state: latest
+      become: true
 
     
     - name: Install requests python package
