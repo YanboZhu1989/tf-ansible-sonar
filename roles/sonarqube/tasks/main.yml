@@ -1,0 +1,91 @@
+---
+- name: Install Java
+  yum:
+    name: '{{ item }}'
+    state: latest
+  with_items:
+    - java-1.8.0-openjdk
+  become: true
+
+  #install PostgreSQL
+  - name: Install PostgreSQL RPM
+  yum:
+    name: https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-7-x86_64/pgdg-centos96-9.6-3.noarch.rpm
+    state: present
+
+- name: Install PostgreSQL
+  yum:
+    name: '{{ item }}'
+    state: latest
+  with_items:
+    - postgresql96-server
+    - postgresql96-contrib
+  become: true
+  register: installed_psql
+
+- name: Intialize PostgreSQL DB
+  command: /usr/pgsql-9.6/bin/postgresql96-setup initdb
+  become: true
+  when: installed_psql.changed
+
+- name: Copies correct PostgreSQL config file over
+  copy:
+    src: pg_hba.conf
+    dest: /var/lib/pgsql/9.6/data/pg_hba.conf
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+
+- name: Enable and Start PostgreSQL
+  service:
+    name: postgresql-9.6
+    state: started
+    enabled: yes
+  become: true
+
+  #postgreSQL config
+  - name: Create Database for SonarQube
+  postgresql_db:
+    name: 'sonar'
+    encoding: UTF-8
+  become: true
+
+- name: Create Sonar User
+  postgresql_user:
+    db: 'sonar'
+    name: 'sonar'
+    password: 'sonar'
+    priv: ALL
+  become: true
+
+  #Download Sonarqube
+- name: Download sonarqube v9.0.1 community version
+  shell: wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.0.1.46107.zip
+- name: install unzip
+  apt: name=unzip update_cache=yes state=latest
+- name: unzip sonarqube
+  shell: unzip sonarqube-9.0.1.46107.zip
+
+#Sonarqube config & start
+- name: Template the correct properties file
+  template:
+    src: sonar.properties.j2
+    dest: /etc/sonarqube-9.0.1.46107/conf/sonar.properties
+    owner: root
+    group: wheel
+    mode: 0644
+  become: true
+
+- name: copy service
+  copy:
+    src: sonar.service
+    dest: /etc/systemd/system/sonar.service
+  become: true
+
+- name: Start and Enable Sonar Service
+  service:
+    name: sonar
+    state: started
+    enabled: yes
+  become: true
