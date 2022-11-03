@@ -62,8 +62,8 @@
   #Download Sonarqube
 - name: Download sonarqube v9.0.1 community version
   shell: wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.0.1.46107.zip
-- name: install unzip
-  apt: name=unzip update_cache=yes state=latest
+#- name: install unzip
+  #apt: name=unzip update_cache=yes state=latest
 - name: unzip sonarqube
   shell: unzip sonarqube-9.0.1.46107.zip
 
