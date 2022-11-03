@@ -1,6 +1,6 @@
 ---
 - name: Install Java
-  package:
+  apt:
     name: '{{ item }}'
     state: latest
   with_items:
@@ -9,12 +9,12 @@
 
   #install PostgreSQL
 - name: Install PostgreSQL RPM
-  package:
+  apt:
     name: https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-7-x86_64/pgdg-centos96-9.6-3.noarch.rpm
     state: present
 
 - name: Install PostgreSQL
-  package:
+  apt:
     name: '{{ item }}'
     state: latest
   with_items:
