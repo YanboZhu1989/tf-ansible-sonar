@@ -52,6 +52,11 @@
     priv: ALL
   become: true
 
+- name: Create SonarQube Directory
+  file:
+    path: '/etc/sonarqube'
+    state: directory
+    mode: 777
   #Download Sonarqube
 - name: Download sonarqube v9.0.1 community version
   shell: wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.0.1.46107.zip
@@ -59,12 +64,14 @@
   #apt: name=unzip update_cache=yes state=latest
 - name: unzip sonarqube
   shell: unzip sonarqube-9.0.1.46107.zip
+  dest: /etc/sonarqube
+ 
 
 #Sonarqube config & start
 - name: Template the correct properties file
   template:
     src: sonar.properties
-    dest: /etc/sonarqube-9.0.1.46107/conf/sonar.properties
+    dest: /etc/sonarqube/sonarqube-9.0.1.46107/conf/sonar.properties
     owner: root
     group: wheel
     mode: 0644
