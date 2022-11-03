@@ -6,6 +6,7 @@
         name: '*'
         state: latest
       become: true
+      when: ansible_os_family == 'RedHat'
 
     - name: Install Dependencies
       yum:
@@ -18,6 +19,7 @@
         - python-psycopg2 #Used for PostgreSQL authentication
         - policycoreutils-python #Used to edit Selinux
       become: true
+      when: ansible_os_family == 'RedHat'
 
   roles:
     - {role: sonarqube }
