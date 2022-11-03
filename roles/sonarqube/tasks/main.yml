@@ -68,7 +68,7 @@
 #Sonarqube config & start
 - name: Template the correct properties file
   template:
-    src: sonar.properties.j2
+    src: sonar.properties
     dest: /etc/sonarqube-9.0.1.46107/conf/sonar.properties
     owner: root
     group: wheel
