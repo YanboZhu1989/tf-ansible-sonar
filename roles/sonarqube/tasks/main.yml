@@ -1,7 +1,7 @@
 ---
 - name: Install Java
   apt:
-    name: ['java-11-openjdk-devel']
+    name: ['openjdk-11-jdk']
     state: latest    
   become: true
   
