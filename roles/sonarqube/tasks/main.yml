@@ -1,49 +1,42 @@
 ---
 - name: Install Java
-  yum:
+  apt:
     name: ['java-11-openjdk-devel']
     state: latest    
   become: true
   
 
   #install PostgreSQL
-- name: Install PostgreSQL RPM
-  yum:
-    name: https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
-    state: present
-  become: true 
-
-- name: Install PostgreSQL
-  yum:
-    name: ['postgresql14-server','postgresql14-contrib']
-    state: latest
+- name: Add the PostgreSQL repository
+  shell: sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" >> /etc/apt/sources.list.d/pgdg.list'
   become: true
-  register: installed_psql
+
+- name: Add the PostgreSQL signing key
+  shell: wget -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O - | sudo apt-key add -
+  become: true
   
-
-- name: Intialize PostgreSQL DB
-  command: /usr/pgsql-14/bin/postgresql-14-setup initdb
+- name: Install PostgreSQL
+  apt: 
+    name: ['postgresql', 'postgresql-contrib']
+   become: true
+   
+- name: Enable and Start PostgreSQL
+  service:
+    name: postgresql-12
+    state: started
+    enabled: yes
   become: true
-  when: installed_psql.changed
-
+  
 - name: Copies correct PostgreSQL config file over
   copy:
     src: pg_hba.conf
-    dest: /var/lib/pgsql/14/data/pg_hba.conf
+    dest: /var/lib/pgsql/12/data/pg_hba.conf
     owner: root
     group: root
     mode: 0644
     backup: yes
   become: true  
     
-
-- name: Enable and Start PostgreSQL
-  service:
-    name: postgresql-14
-    state: started
-    enabled: yes
-  become: true
-
   #postgreSQL config
 - name: Create Database for SonarQube
   postgresql_db:
