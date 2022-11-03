@@ -10,7 +10,7 @@
 
     - name: Install Dependencies
       apt:
-        name: ['unzip','curl']
+        name: ['unzip','curl', 'python-psycopg2-doc']
         state: latest
       become: true
       
