@@ -38,7 +38,10 @@
   become: true  
     
   #postgreSQL config
+
 - name: Create Database for SonarQube
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
   postgresql_db:
     name: 'sonar'
     encoding: UTF-8
