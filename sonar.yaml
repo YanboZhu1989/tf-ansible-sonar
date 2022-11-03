@@ -1,7 +1,6 @@
 ---
 - name: Install 
 - hosts: all
-  remote-user: ansible
   pre_tasks:
     - name: Update all the packages
       yum:
