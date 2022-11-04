@@ -3,7 +3,7 @@
   roles:
     - role: sonarqube
       vars:
-        ansible_python_interpreter: "~/.local/lib/python3.8/site-packages/psycopg2" 
+        ansible_python_interpreter: "/local/lib/python3.8/site-packages/psycopg2" 
       become: true  
 
   pre_tasks:
@@ -31,7 +31,7 @@
       pip:
         name: requests
       vars:
-        ansible_python_interpreter: ~/.local/lib/python3.8/site-packages/psycopg2
+        ansible_python_interpreter: /local/lib/python3.8/site-packages/psycopg2
       become: true  
         
 
