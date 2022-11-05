@@ -30,32 +30,37 @@
     backup: yes
   become: true   
   
+  
 - name: Enable and Start PostgreSQL
   service:
     name: postgresql
     state: started
     enabled: yes
   become: true
-  
-
-    
+     
   #postgreSQL config
-
+ 
 - name: Create Database for SonarQube
   vars:
     ansible_python_interpreter: /usr/bin/python3
   postgresql_db:
     name: 'sonar'
     encoding: UTF-8
+  become: true 
+  
+- name: pd reset database user
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
   become: true
-
-- name: Create Sonar User
-  postgresql_user:
-    db: 'sonar'
-    name: 'sonar'
-    password: 'sonar'
+  become_method: sudo
+  become_user: postgres
+  postgresql_user: 
+    db: sonar
+    name: sonar
+    password: "sonar" 
     priv: ALL
-  become: true
+
+
 
 - name: Create SonarQube Directory
   file:
