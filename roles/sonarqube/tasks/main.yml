@@ -90,7 +90,7 @@
     src: sonar.properties
     dest: /etc/sonarqube/sonarqube-9.0.1.46107/conf/sonar.properties
     owner: root
-    group: wheel
+    group: root
     mode: 0644
   become: true
 
