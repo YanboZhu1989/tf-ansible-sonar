@@ -18,13 +18,6 @@
 - name: Install PostgreSQL
   apt: 
     name: ['postgresql', 'postgresql-contrib']
-  #become: true
-   
-- name: Enable and Start PostgreSQL
-  service:
-    name: postgresql
-    state: started
-    enabled: yes
   become: true
   
 - name: Copies correct PostgreSQL config file over
@@ -35,7 +28,16 @@
     group: root
     mode: 0644
     backup: yes
-  become: true  
+  become: true   
+  
+- name: Enable and Start PostgreSQL
+  service:
+    name: postgresql
+    state: started
+    enabled: yes
+  become: true
+  
+
     
   #postgreSQL config
 
