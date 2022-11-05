@@ -76,6 +76,9 @@
   
 - name: unzip sonarqube
   shell: unzip sonarqube-9.0.1.46107.zip
+  
+- name: move file
+  shell: cp -R ./sonarqube-9.0.1.46107 /etc/sonarqube
 
 
 #Sonarqube config & start
