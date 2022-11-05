@@ -1,5 +1,5 @@
 ---
-- hosts: *
+- hosts: '*'
   roles:
     - role: sonarqube
       vars:
