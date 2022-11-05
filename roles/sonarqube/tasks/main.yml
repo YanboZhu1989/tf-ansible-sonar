@@ -70,6 +70,14 @@
     path: '/etc/sonarqube'
     state: directory
     mode: 777
+    
+- name: Upgrading Software
+  expect:
+    command: unzip sonarqube-9.0.1.46107.zip
+    responses:
+      'First Question in the prompt' : 'y'
+      'Second Question in the prompt' : 'y'
+      
   #Download Sonarqube
 - name: Download sonarqube v9.0.1 community version
   shell: wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.0.1.46107.zip
