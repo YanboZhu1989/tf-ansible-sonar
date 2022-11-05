@@ -74,7 +74,6 @@
   shell: wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.0.1.46107.zip
   
 - name: unzip sonarqube
-  shell: unzip sonarqube-9.0.1.46107.zip
   expect:
     command: unzip sonarqube-9.0.1.46107.zip
     responses:
