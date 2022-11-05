@@ -77,8 +77,8 @@
   expect:
     command: unzip sonarqube-9.0.1.46107.zip
     responses:
-      'First Question in the prompt' : 'y'
-      'Second Question in the prompt' : 'y'
+      'replace sonarqube-9.0.1.46107/bin/jsw-license/LICENSE.txt?' : 'y'
+     
   
 - name: move file
   shell: cp -R ./sonarqube-9.0.1.46107 /etc/sonarqube
