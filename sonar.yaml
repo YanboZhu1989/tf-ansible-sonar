@@ -1,7 +1,6 @@
 ---
 - hosts: all
-  remote_user: ansible
-  roles:
+    roles:
     - role: sonarqube
       vars:
         ansible_python_interpreter: "/usr/bin/python3.8" 
