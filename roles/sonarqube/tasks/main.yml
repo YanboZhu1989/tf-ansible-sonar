@@ -82,14 +82,14 @@
 - name: unzip sonarqube
   shell: unzip sonarqube-9.0.1.46107.zip
      
-- name: Edit the sysctl configuration file
-  copy:
-    src: sysctl.conf
-    dest: /etc/sysctl.conf
-    owner: root
-    group: root
-    mode: 0644
-  become: true
+#- name: Edit the sysctl configuration file
+ # copy:
+  #  src: sysctl.conf
+   # dest: /etc/sysctl.conf
+    #owner: root
+    #group: root
+    #mode: 0644
+  #become: true
   
 - name: Edit /etc/security/limits.conf
   copy:
