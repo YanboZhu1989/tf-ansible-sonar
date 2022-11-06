@@ -63,12 +63,6 @@
     password: "sonar" 
     priv: ALL
 
-- name: Create SonarQube Directory
-  file:
-    path: '/etc/sonarqube'
-    state: directory
-    mode: 777
-
   #Download Sonarqube
 - name: Download sonarqube v9.0.1 community version
   shell: wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.0.1.46107.zip
@@ -86,14 +80,14 @@
   become: true
   
 - name: move file
-  shell: cp -R ./sonarqube-9.0.1.46107 /etc/sonarqube
+  shell: mv sonarqube-9.0.1.46107 /opt/sonarqube
 
 
 #Sonarqube config & start
 - name: Template the correct properties file
   template:
     src: sonar.properties
-    dest: /etc/sonarqube/sonarqube-9.0.1.46107/conf/sonar.properties
+    dest: /opt/sonarqube/conf/sonar.properties
     owner: root
     group: root
     mode: 0644
@@ -110,17 +104,17 @@
   become: true
   
 - name: Create a sonar user
-  shell: useradd -d /etc/sonarqube -g sonar sonar
+  shell: useradd -d /opt/sonarqube -g sonar sonar
   become: true
   
 - name: Grant the sonar user access
-  shell: chown sonar:sonar /etc/sonarqube -R
+  shell: chown sonar:sonar /opt/sonarqube -R
   become: true
   
 - name: move file sonar.sh  
   copy:
     src: sonar.sh
-    dest: /etc/sonarqube/sonarqube-9.0.1.46107/bin/linux-x86-64/sonar.sh
+    dest: /opt/sonarqube/bin/linux-x86-64/sonar.sh
   become: true
   
 - name: Start and Enable Sonar Service
