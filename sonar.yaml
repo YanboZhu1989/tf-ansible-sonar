@@ -16,7 +16,7 @@
 
     - name: Install Dependencies
       apt:
-        name: ['unzip','curl']
+        name: ['unzip','curl','python3-pip']
         state: latest
       become: true
       
@@ -31,7 +31,7 @@
       pip:
         name: requests
       vars:
-        ansible_python_interpreter: /usr/bin/python3.8
+        ansible_python_interpreter: /usr/bin/python3
       become: true  
         
 
