@@ -79,6 +79,15 @@
     mode: 0644
   become: true
   
+- name: Edit /etc/security/limits.conf
+  copy:
+    src: limits.conf
+    dest: /etc/security/limits.conf
+    owner: root
+    group: root
+    mode: 0644
+  become: true  
+  
 - name: move file
   shell: mv sonarqube-9.0.1.46107 /opt/sonarqube
 
