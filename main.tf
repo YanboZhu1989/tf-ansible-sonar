@@ -17,6 +17,8 @@ resource "google_compute_instance" "sonar-server" {
   name         = "sonar-server"
   machine_type = "e2-micro"
   zone         = "australia-southeast1-b"
+  
+  tags = ["http-server", "https-server"]
 
   boot_disk {
     initialize_params {
