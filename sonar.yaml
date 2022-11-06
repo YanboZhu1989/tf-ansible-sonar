@@ -33,6 +33,7 @@
       
     - name: Installing Homebrew
       shell: /usr/bin/ -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+      become: true
         
     - name: Updating Homebrew
       homebrew:
