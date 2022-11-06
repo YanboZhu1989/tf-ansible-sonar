@@ -117,6 +117,12 @@
   shell: chown sonar:sonar /etc/sonarqube -R
   become: true
   
+- name: move file sonar.sh  
+  copy:
+    src: sonar.sh
+    dest: /etc/sonarqube/sonarqube-9.0.1.46107/bin/linux-x86-64/sonar.sh
+  become: true
+  
 - name: Start and Enable Sonar Service
   service:
     name: sonar
