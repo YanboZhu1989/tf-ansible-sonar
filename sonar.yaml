@@ -19,8 +19,12 @@
         name: ['unzip','curl']
         state: latest
       become: true
+    
+    - name: install pip3
+      apt: name=python3-pip state=present 
+      become: true
       
-   # - name: install prerequisites    
+  # - name: install prerequisites    
      # apt: 
        # name: ['python3-pip'] 
        # state: latest
