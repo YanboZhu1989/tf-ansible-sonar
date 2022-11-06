@@ -64,8 +64,16 @@
   postgresql_owner: 
     db: "sonar"
     new_owner: "sonar"
-    password: "sonar" 
-    priv: ALL
+
+- name: Grant db user access to app db
+  postgresql_privs:
+        type: database
+        database: "sonar"
+        roles: "sonar"
+        grant_option: no
+        privs: all
+  become: true
+  become_user: postgres
 
   #Download Sonarqube
 - name: Download sonarqube v9.0.1 community version
