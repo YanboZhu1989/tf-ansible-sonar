@@ -33,7 +33,6 @@
       
     - name: Installing Homebrew
       shell: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-      become: true
       
     - name: Add Homebrew to your PATH
       shell: eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
