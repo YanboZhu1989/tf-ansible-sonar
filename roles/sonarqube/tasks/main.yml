@@ -100,6 +100,18 @@
     dest: /etc/systemd/system/sonar.service
   become: true
 
+- name: Create a sonar group
+  shell: groupadd sonar
+  become: true
+  
+- name: Create a sonar user
+  shell: useradd -d /etc/sonarqube -g sonar sonar
+  become: true
+  
+- name: Grant the sonar user access
+  shell: chown sonar:sonar /etc/sonarqube -R
+  become: true
+  
 - name: Start and Enable Sonar Service
   service:
     name: sonar
