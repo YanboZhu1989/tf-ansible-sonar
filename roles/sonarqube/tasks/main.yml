@@ -111,11 +111,11 @@
   shell: chown sonar:sonar /opt/sonarqube -R
   become: true
   
-- name: move file sonar.sh  
-  copy:
-    src: sonar.sh
-    dest: /opt/sonarqube/bin/linux-x86-64/sonar.sh
-  become: true
+#- name: move file sonar.sh  
+ # copy:
+  #  src: sonar.sh
+   # dest: /opt/sonarqube/bin/linux-x86-64/sonar.sh
+  #become: true
   
 - name: Start and Enable Sonar Service
   service:
