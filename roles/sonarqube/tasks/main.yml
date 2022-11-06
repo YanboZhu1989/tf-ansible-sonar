@@ -74,9 +74,8 @@
   shell: wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.0.1.46107.zip
   
 - name: unzip sonarqube
-  expect:
-    command: unzip sonarqube-9.0.1.46107.zip
-    
+  shell: unzip sonarqube-9.0.1.46107.zip
+     
 - name: Edit the sysctl configuration file
   copy:
     src: sysctl.conf
