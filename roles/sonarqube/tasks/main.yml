@@ -135,7 +135,7 @@
 - name: replace the script file RUN_AS_USER
   become: yes
   ansible.builtin.lineinfile:
-     path: /opt/sonarqube/sonarqube-9.0.1.46107/bin/linux-x86-64/sonar.sh
+     path: /opt/sonarqube/bin/linux-x86-64/sonar.sh
      regexp: '^#RUN_AS_USER='
      line: RUN_AS_USER=sonar
   
