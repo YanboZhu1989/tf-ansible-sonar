@@ -41,13 +41,12 @@
   #postgreSQL config
  
 - name: Create Database for SonarQube
-  vars:
-    ansible_python_interpreter: /usr/bin/python3
   become: true 
   become_method: sudo
   become_user: postgres  
   postgresql_db:
-    name: 'sonar'
+    state: present
+    name: "sonar"
     encoding: UTF-8
 
 - name: Create db user
@@ -63,7 +62,7 @@
   become_method: sudo
   become_user: postgres
   postgresql_owner: 
-    db: sonar
+    db: "sonar"
     new_owner: "sonar"
     password: "sonar" 
     priv: ALL
