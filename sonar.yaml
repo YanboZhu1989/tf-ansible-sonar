@@ -16,7 +16,7 @@
 
     - name: Install Dependencies
       apt:
-        name: ['unzip','curl','python3-pip']
+        name: ['unzip','curl']
         state: latest
       become: true
       
@@ -26,12 +26,26 @@
         state: latest
       become: true
 
-    
-    - name: Install requests python package
-      pip:
-        name: requests
-      vars:
-        ansible_python_interpreter: /usr/bin/python3
-      become: true  
-        
+    - name: Ensuring Homebrew Is Installed
+      stat:
+        path: /usr/local/bin/brew
+      register: homebrew_check
+    - name: Installing Homebrew
+      shell: /usr/bin/ -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+      when:
+        - not homebrew_check.stat.exists
+        - install_homebrew_if_missing
+    - name: Updating Homebrew
+      homebrew:
+        update_homebrew: true
+      when: homebrew_check.stat.exists
+      
+    - name: Installing Homebrew Packages
+      homebrew:
+        name: "python"
+        state: present
+      register: result
+      until: result is successful
+      when: homebrew_check.stat.exists
+
 
