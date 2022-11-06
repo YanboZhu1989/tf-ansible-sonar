@@ -15,7 +15,7 @@ provider "google" {
 
 resource "google_compute_instance" "sonar-server" {
   name         = "sonar-server"
-  machine_type = "e2-micro"
+  machine_type = "e2-medium"
   zone         = "australia-southeast1-b"
   
   tags = ["http-server", "https-server"]
