@@ -76,9 +76,15 @@
 - name: unzip sonarqube
   expect:
     command: unzip sonarqube-9.0.1.46107.zip
-    responses:
-      'replace sonarqube-9.0.1.46107/bin/jsw-license/LICENSE.txt?' : 'A'
-     
+    
+- name: Edit the sysctl configuration file
+  copy:
+    src: sysctl.conf
+    dest: /etc/sysctl.conf
+    owner: root
+    group: root
+    mode: 0644
+  become: true
   
 - name: move file
   shell: cp -R ./sonarqube-9.0.1.46107 /etc/sonarqube
