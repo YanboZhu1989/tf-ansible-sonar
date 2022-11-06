@@ -49,17 +49,22 @@
   postgresql_db:
     name: 'sonar'
     encoding: UTF-8
-  
+
+- name: Create db user
+  postgresql_user:
+        state: present
+        name: "sonar"
+        password: "sonar"
+  become: yes
+  become_user: postgres
   
 - name: pd reset database user
-  vars:
-    ansible_python_interpreter: /usr/bin/python3
   become: true
   become_method: sudo
   become_user: postgres
-  postgresql_user: 
+  postgresql_owner: 
     db: sonar
-    name: sonar
+    new_owner: "sonar"
     password: "sonar" 
     priv: ALL
 
