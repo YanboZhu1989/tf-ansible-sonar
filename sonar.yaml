@@ -22,32 +22,9 @@
       
     - name: install prerequisites    
       apt: 
-        name: ['libpq-dev'] 
+        name: ['python3-pip'] 
         state: latest
       become: true
 
-    - name: Ensuring Homebrew Is Installed
-      stat:
-        path: /usr/local/bin/brew
-      register: homebrew_check
-      
-    - name: Installing Homebrew
-      shell: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-      
-    - name: Add Homebrew to your PATH
-      shell: eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-        
-    - name: Updating Homebrew
-      homebrew:
-        update_homebrew: true
-   
-      
-    - name: Installing Homebrew Packages
-      homebrew:
-        name: "python"
-        state: present
-      register: result
-      until: result is successful
-      when: homebrew_check.stat.exists
 
 
