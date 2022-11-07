@@ -108,11 +108,15 @@
 - name: Download sonarqube v9.0.1 community version
   shell: wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.0.1.46107.zip
   
-- name: unzip sonarqube
-  shell: sudo unzip sonarqube-9.0.1.46107.zip
+- name: unzip file
+  become: yes
+  ansible.builtin.unarchive:
+    src: /opt/sonarqube/sonarqube-9.0.1.46107.zip
+    dest: /opt/sonarqube/
+    remote_src: yes
    
-- name: move file
-  shell: sudo mv sonarqube-9.0.1.46107 /opt/sonarqube
+#- name: move file
+  #shell: sudo mv sonarqube-9.0.1.46107 /opt/sonarqube
  
 #Sonarqube config & start
 - name: replace the sonar.jdbc.username
