@@ -3,6 +3,7 @@
   apt:
     name: ['openjdk-11-jdk']
     state: latest    
+    update_cache: yes
   become: true
   
 
@@ -54,12 +55,11 @@
         state: present
         name: "sonar"
         password: "sonar"
-  become: yes
+  become: true
   become_user: postgres
   
 - name: pd reset database user
   become: true
-  become_method: sudo
   become_user: postgres
   postgresql_owner: 
     db: "sonar"
@@ -67,48 +67,60 @@
 
 - name: Grant db user access to app db
   postgresql_privs:
-        type: database
-        database: "sonar"
-        roles: "sonar"
-        grant_option: no
-        privs: all
+     type: database
+     database: "sonar"
+     roles: "sonar"
+     grant_option: no
+     privs: all
   become: true
   become_user: postgres
-
+  
+- name: Modify Kernel System Limits
+  ansible.builtin.blockinfile:      
+     path: /etc/sysctl.conf
+     block: |
+        vm.max_map_count=524288
+        fs.file-max=131072
+        ulimit -n 131072
+        ulimit -u 8192 
+        
+- name: Add entries in /etc/security/limits.conf
+  ansible.builtin.blockinfile:
+     path: /etc/security/limits.conf
+     block: |
+        sonarqube   -   nofile   131072
+        sonarqube   -   nproc    8192
+        
+- name: reboot system
+  ansible.builtin.reboot:         
+      
+#- name: Edit /etc/security/limits.conf
+  #copy:
+   # src: limits.conf
+    #dest: /etc/security/limits.conf
+    #owner: root
+    #group: root
+    #mode: 0644
+  #become: true 
+  
   #Download Sonarqube
+  
 - name: Download sonarqube v9.0.1 community version
   shell: wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.0.1.46107.zip
   
 - name: unzip sonarqube
   shell: unzip sonarqube-9.0.1.46107.zip
-     
-- name: Modify Kernel System Limits
-  ansible.builtin.blockinfile:
-     path: /etc/sysctl.conf
-     block: |
-          vm.max_map_count=524288
-          fs.file-max=131072
-          ulimit -n 131072
-          ulimit -u 8192 
-  
-- name: Edit /etc/security/limits.conf
-  copy:
-    src: limits.conf
-    dest: /etc/security/limits.conf
-    owner: root
-    group: root
-    mode: 0644
-  become: true  
-  
+   
 - name: move file
   shell: mv sonarqube-9.0.1.46107 /opt/sonarqube
+  become: true
 
 
 #Sonarqube config & start
 - name: Template the correct properties file
   template:
     src: sonar.properties
-    dest: /opt/sonarqube/conf/sonar.properties
+    dest: /opt/sonarqube/sonarqube-9.0.1.46107/conf/sonar.properties
     owner: root
     group: root
     mode: 0644
@@ -125,24 +137,24 @@
   become: true
   
 - name: Create a sonar user
-  shell: useradd -d /opt/sonarqube -g sonar sonar
+  shell: useradd -d /opt/sonarqube/sonarqube-9.0.1.46107 -g sonar sonar
   become: true
   
 - name: Grant the sonar user access
-  shell: sudo chown sonar:sonar /opt/sonarqube -R
+  shell: sudo chown sonar:sonar /opt/sonarqube/sonarqube-9.0.1.46107 -R
   become: true
   
 - name: replace the script file RUN_AS_USER
   become: yes
   ansible.builtin.lineinfile:
-     path: /opt/sonarqube/bin/linux-x86-64/sonar.sh
+     path: /opt/sonarqube/sonarqube-9.0.1.46107/bin/linux-x86-64/sonar.sh
      regexp: '^#RUN_AS_USER='
      line: RUN_AS_USER=sonar
   
 #- name: move file sonar.sh  
  # copy:
   #  src: sonar.sh
-   # dest: /opt/sonarqube/bin/linux-x86-64/sonar.sh
+   # dest: /opt/sonarqube/sonarqube-9.0.1.46107/bin/linux-x86-64/sonar.sh
   #become: true
   
 - name: Start and Enable Sonar Service
