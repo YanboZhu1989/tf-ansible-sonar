@@ -112,10 +112,8 @@
   shell: unzip sonarqube-9.0.1.46107.zip
    
 - name: move file
-  shell: mv sonarqube-9.0.1.46107 /opt/sonarqube
-  become: true
-
-
+  shell: sudo mv sonarqube-9.0.1.46107 /opt/sonarqube
+ 
 #Sonarqube config & start
 - name: Template the correct properties file
   template:
