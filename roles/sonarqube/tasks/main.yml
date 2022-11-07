@@ -115,14 +115,26 @@
   shell: sudo mv sonarqube-9.0.1.46107 /opt/sonarqube
  
 #Sonarqube config & start
-- name: Template the correct properties file
-  template:
-    src: sonar.properties
-    dest: /opt/sonarqube/sonarqube-9.0.1.46107/conf/sonar.properties
-    owner: root
-    group: root
-    mode: 0644
-  become: true
+- name: replace the sonar.jdbc.username
+  become: yes
+  ansible.builtin.lineinfile:
+     path: /opt/sonarqube/sonarqube-9.0.1.46107/conf/sonar.properties
+     regexp: '^#sonar.jdbc.username='       
+     line: sonar.jdbc.username=sonar
+
+- name: replace the sonar.jdbc.password
+  become: yes
+  ansible.builtin.lineinfile:
+     path: /opt/sonarqube/sonarqube-9.0.1.46107/conf/sonar.properties
+     regexp: '^#sonar.jdbc.password='     
+     line: sonar.jdbc.password=soanr
+
+- name: add the sonar.jdbc.url
+  become: yes
+  ansible.builtin.lineinfile:
+     path: /opt/sonarqube/sonarqube-9.0.1.46107/conf/sonar.properties
+     line: sonar.jdbc.url=jdbc:postgresql://localhost/sonar
+     state: present
 
 - name: copy service
   copy:
