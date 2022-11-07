@@ -1,33 +1,20 @@
 [Unit]
 
 Description=SonarQube service
-
 After=syslog.target network.target
-
-
 
 [Service]
 
 Type=forking
-
-
+User=sonar
+Group=sonar
+PermissionsStartOnly=true
 ExecStart=/opt/sonarqube/sonarqube-9.0.1.46107/bin/linux-x86-64/sonar.sh start
-
 ExecStop=/opt/sonarqube/sonarqube-9.0.1.46107/bin/linux-x86-64/sonar.sh stop
-
-
-User=root
-
-Group=root
-
-Restart=always
-
-
-
+StandardOutput=syslog
 LimitNOFILE=131072
-
 LimitNPROC=8192
-
+Restart=always
 
 
 [Install]
