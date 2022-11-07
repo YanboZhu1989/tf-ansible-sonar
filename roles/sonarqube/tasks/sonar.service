@@ -11,9 +11,9 @@ After=syslog.target network.target
 Type=forking
 
 
-ExecStart=/opt/sonarqube/bin/linux-x86-64/sonar.sh start
+ExecStart=/opt/sonarqube/sonarqube-9.0.1.46107/bin/linux-x86-64/sonar.sh start
 
-ExecStop=/opt/sonarqube/bin/linux-x86-64/sonar.sh stop
+ExecStop=/opt/sonarqube/sonarqube-9.0.1.46107/bin/linux-x86-64/sonar.sh stop
 
 
 User=root
