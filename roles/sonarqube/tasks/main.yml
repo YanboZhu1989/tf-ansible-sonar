@@ -109,7 +109,7 @@
   shell: wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.0.1.46107.zip
   
 - name: unzip sonarqube
-  shell: unzip sonarqube-9.0.1.46107.zip
+  shell: sudo unzip sonarqube-9.0.1.46107.zip
    
 - name: move file
   shell: sudo mv sonarqube-9.0.1.46107 /opt/sonarqube
