@@ -64,13 +64,18 @@
   become_user: postgres
   
 - name: Modify Kernel System Limits
-  ansible.builtin.blockinfile:      
-     path: /etc/sysctl.conf
-     block: |
-        vm.max_map_count=524288
-        fs.file-max=131072
-        ulimit -n 131072
-        ulimit -u 8192 
+  copy:
+    src: sysctl.conf
+    dest: /etc/sysctl.conf
+  become: true
+  
+ # ansible.builtin.blockinfile:      
+  #   path: /etc/sysctl.conf
+   #  block: |
+    #    vm.max_map_count=524288
+     #   fs.file-max=131072
+      #  ulimit -n 131072
+       # ulimit -u 8192 
         
 - name: Add entries in /etc/security/limits.conf
   ansible.builtin.blockinfile:
@@ -128,8 +133,9 @@
      
 - name: copy propertier to sonarqube dir
   copy: 
-    src: 
-
+    src: sonar.properties
+    dest: /opt/sonarqube/sonarqube-9.0.1.46107/conf/sonar.properties
+  become: true
 
 - name: copy service
   copy:
