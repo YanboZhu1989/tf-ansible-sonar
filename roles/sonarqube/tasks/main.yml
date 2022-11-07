@@ -20,15 +20,15 @@
     name: ['postgresql', 'postgresql-contrib']
   become: true
   
-- name: Copies correct PostgreSQL config file over
-  copy:
-    src: pg_hba.conf
-    dest: /var/lib/postgresql/12/main/pg_hba.conf
-    owner: root
-    group: root
-    mode: 0644
-    backup: yes
-  become: true   
+#- name: Copies correct PostgreSQL config file over
+ # copy:
+  #  src: pg_hba.conf
+   # dest: /var/lib/postgresql/12/main/pg_hba.conf
+    #owner: root
+    #group: root
+    #mode: 0644
+    #backup: yes
+  #become: true   
   
   
 - name: Enable and Start PostgreSQL
