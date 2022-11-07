@@ -104,9 +104,22 @@
   #become: true 
   
   #Download Sonarqube
+- name: sonarqube dir
+  become: yes
+  ansible.builtin.file:
+     path: /opt/sonarqube
+     state: directory
+     mode: '0755'
+
+- name: download sonarqube
+  become: yes
+  ansible.builtin.get_url:
+     url: https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.0.1.46107.zip
+     dest: /opt/sonarqube/
+     mode: '0755'
   
-- name: Download sonarqube v9.0.1 community version
-  shell: wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.0.1.46107.zip
+#- name: Download sonarqube v9.0.1 community version
+  #shell: wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.0.1.46107.zip
   
 - name: unzip file
   become: yes
