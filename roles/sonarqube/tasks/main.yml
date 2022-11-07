@@ -151,12 +151,6 @@
      regexp: '^#RUN_AS_USER='
      line: RUN_AS_USER=sonar
   
-#- name: move file sonar.sh  
- # copy:
-  #  src: sonar.sh
-   # dest: /opt/sonarqube/sonarqube-9.0.1.46107/bin/linux-x86-64/sonar.sh
-  #become: true
-  
 - name: Start and Enable Sonar Service
   service:
     name: sonar
