@@ -105,26 +105,31 @@
     remote_src: yes
  
 #Sonarqube config & start
-- name: replace the sonar.jdbc.username
-  become: yes
-  ansible.builtin.lineinfile:
-     path: /opt/sonarqube/sonarqube-9.0.1.46107/conf/sonar.properties
-     regexp: '^#sonar.jdbc.username='       
-     line: sonar.jdbc.username=sonar
+#- name: replace the sonar.jdbc.username
+  #become: yes
+  #ansible.builtin.lineinfile:
+     #path: /opt/sonarqube/sonarqube-9.0.1.46107/conf/sonar.properties
+     #regexp: '^#sonar.jdbc.username='       
+     #line: sonar.jdbc.username=sonar
 
-- name: replace the sonar.jdbc.password
-  become: yes
-  ansible.builtin.lineinfile:
-     path: /opt/sonarqube/sonarqube-9.0.1.46107/conf/sonar.properties
-     regexp: '^#sonar.jdbc.password='     
-     line: sonar.jdbc.password=sonar
+#- name: replace the sonar.jdbc.password
+  #become: yes
+  #ansible.builtin.lineinfile:
+     #path: /opt/sonarqube/sonarqube-9.0.1.46107/conf/sonar.properties
+     #regexp: '^#sonar.jdbc.password='     
+     #line: sonar.jdbc.password=sonar
 
-- name: add the sonar.jdbc.url
-  become: yes
-  ansible.builtin.lineinfile:
-     path: /opt/sonarqube/sonarqube-9.0.1.46107/conf/sonar.properties
-     line: sonar.jdbc.url=jdbc:postgresql://localhost:5432/sonar
-     state: present
+#- name: add the sonar.jdbc.url
+  #become: yes
+  #ansible.builtin.lineinfile:
+     #path: /opt/sonarqube/sonarqube-9.0.1.46107/conf/sonar.properties
+     #line: sonar.jdbc.url=jdbc:postgresql://localhost:5432/sonar
+     #state: present
+     
+- name: copy propertier to sonarqube dir
+  copy: 
+    src: 
+
 
 - name: copy service
   copy:
